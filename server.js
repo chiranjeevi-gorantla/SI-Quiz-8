@@ -145,7 +145,7 @@ app.post("/student", (req, res) => {
  *       500:
  *         description: Could not get students
  */
-  app.get("/student", (req, res) => {
+  app.get("/students", (req, res) => {
     getConnection()
       .then((conn) => {
         conn
