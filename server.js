@@ -207,7 +207,7 @@ app.put("/student", (req, res) => {
       .then((conn) => {
         conn
           .query("UPDATE student SET TITLE = ?, SECTION = ? WHERE ROLLID = ?",
-          [body.TILTLE, body.SECTION, body.ROLLID])
+          [body.TITLE, body.SECTION, body.ROLLID])
           .then((rows) => {
               conn.release();
               return res.json(rows);
