@@ -105,7 +105,7 @@ app.post("/student", (req, res) => {
     getConnection()
       .then((conn) => {
         conn
-          .query("INSERT INTO student (NAME, TITLE, CLASS, SECTION, ROLLID) VALUES (?,?,?,?,?,?);",
+          .query("INSERT INTO student (NAME, TITLE, CLASS, SECTION, ROLLID) VALUES (?,?,?,?,?);",
           [body.NAME, body.TITLE, body.CLASS, body.SECTION, body.ROLLID])
           .then((rows) => {
               conn.release();
