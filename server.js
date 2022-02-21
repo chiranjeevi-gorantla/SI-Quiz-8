@@ -77,13 +77,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
  *                    example: Gorantla
  *                  CLASS:
  *                    type: string
- *                    example: V
+ *                    example: VII
  *                  SECTION:
  *                    type: string
- *                    example: C
+ *                    example: F
  *                  ROLLID:
  *                    type: number
- *                    example: 47
+ *                    example: 26
  *     responses:
  *       200:
  *         description: Succesfully inserted
@@ -179,12 +179,9 @@ app.post("/student", (req, res) => {
  *                  TITLE:
  *                    type: string
  *                    example: Chiran
- *                  SECTION:
- *                    type: string
- *                    example: A
  *                  ROLLID:
  *                    type: number
- *                    example: 47
+ *                    example: 26
  *     responses:
  *       200:
  *         description: Succesfully updated
@@ -206,8 +203,8 @@ app.put("/student", (req, res) => {
     getConnection()
       .then((conn) => {
         conn
-          .query("UPDATE student SET TITLE = ?, SECTION = ? WHERE ROLLID = ?",
-          [body.TITLE, body.SECTION, body.ROLLID])
+          .query("UPDATE student SET TITLE = ? WHERE ROLLID = ?",
+          [body.TITLE,  body.ROLLID])
           .then((rows) => {
               conn.release();
               return res.json(rows);
@@ -291,7 +288,7 @@ app.patch("/student", (req, res) => {
  *         name: id
  *         schema:
  *           type: string
- *           example: 47
+ *           example: 26
  *         required: true
  *         description: id that needs to be deleted
  *     responses:
@@ -311,7 +308,7 @@ app.patch("/student", (req, res) => {
  *         description: Could not delete
  */
 
-app.delete("/student/id", (req, res) => {
+app.delete("/student/:id", (req, res) => {
     let id = req.params.id;
     getConnection()
       .then((conn) => {
