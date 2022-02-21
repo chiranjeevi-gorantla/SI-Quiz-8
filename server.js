@@ -101,7 +101,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
  *         description: Could not insert
  */
 app.post("/student", (req, res) => {
-    let body = res.body;
+    let body = req.body;
     getConnection()
       .then((conn) => {
         conn
@@ -202,7 +202,7 @@ app.post("/student", (req, res) => {
  *         description: Could not update
  */
 app.put("/student", (req, res) => {
-    let body = res.body;
+    let body = req.body;
     getConnection()
       .then((conn) => {
         conn
@@ -260,7 +260,7 @@ app.put("/student", (req, res) => {
  *         description: Could not update
  */
 app.patch("/student", (req, res) => {
-    let body = res.body;
+    let body = req.body;
     getConnection()
       .then((conn) => {
         conn
