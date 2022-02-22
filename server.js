@@ -11,7 +11,7 @@ const OPTIONS = {
       "info": {
         "title": "Swagger API Reference",
         "version": "1.0.0",
-        "description": "A Simple Express Swagger API",
+        "description": "A Swagger API",
         "termsOfService": "http://example.com/terms/",
         "contact": {
           "name": "chiranjeevi-gorantla",
@@ -23,7 +23,7 @@ const OPTIONS = {
       "servers": [
         {
           "url": "http://143.198.132.170:3000/",
-          "description": "Swagger Express API Documentation"
+          "description": "Swagger API Documentation"
         }
       ]
     },
@@ -100,7 +100,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
  *       500:
  *         description: Could not insert
  */
-app.post("/student", (req, res) => {
+app.post("/student", [
+    check("NAME", "NAME must not be empty").isLength({
+      min: 1,
+    }),
+    check("TITLE", "TITLE must not be empty").isLength({
+      min: 1,
+    }),
+    check("CLASS", "CLASS must not be empty").isLength({
+      min: 1,
+    }),
+    check("SECTION", "SECTION must not be empty").isLength({
+      min: 1,
+    }),
+    check("ROLLID", "ROLLID must not be empty").isLength({
+        min: 1,
+      }),
+  ], (req, res) => {
+    const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
     let body = req.body;
     getConnection()
       .then((conn) => {
@@ -198,7 +218,18 @@ app.post("/student", (req, res) => {
  *       500:
  *         description: Could not update
  */
-app.put("/student", (req, res) => {
+app.put("/student", [
+    check("TITLE", "TITLE must not be empty").isLength({
+      min: 1,
+    }),
+    check("ROLLID", "ROLLID must not be empty").isLength({
+        min: 1,
+      }),
+  ], (req, res) => {
+    const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
     let body = req.body;
     getConnection()
       .then((conn) => {
@@ -256,7 +287,21 @@ app.put("/student", (req, res) => {
  *       500:
  *         description: Could not update
  */
-app.patch("/student", (req, res) => {
+app.patch("/student", [
+    check("CLASS", "CLASS must not be empty").isLength({
+      min: 1,
+    }),
+    check("SECTION", "SECTION must not be empty").isLength({
+      min: 1,
+    }),
+    check("ROLLID", "ROLLID must not be empty").isLength({
+        min: 1,
+      }),
+  ], (req, res) => {
+    const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
     let body = req.body;
     getConnection()
       .then((conn) => {
@@ -308,7 +353,11 @@ app.patch("/student", (req, res) => {
  *         description: Could not delete
  */
 
-app.delete("/student/:id", (req, res) => {
+app.delete("/student/:id", [
+    check("id", "ROLLID must not be empty").isLength({
+        min: 1,
+      }),
+  ], (req, res) => {
     let id = req.params.id;
     getConnection()
       .then((conn) => {
